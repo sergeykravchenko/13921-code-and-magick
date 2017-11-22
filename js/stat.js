@@ -21,8 +21,8 @@ function getRandomNum(min, max) {
   return Math.random() * (max - min) + min;
 }
 
-var getGameResults = function (ctx, names, times) {
-  var step = -chartHeight / (getMaxArray(times) - 0);
+var drawChart = function (ctx, names, times) {
+  var step = -chartHeight / getMaxArray(times);
 
   for (var i = 0; i < times.length; i++) {
     if (names[i] === 'Вы') {
@@ -38,7 +38,7 @@ var getGameResults = function (ctx, names, times) {
     ctx.fillRect(startBarX, startBarY, barWidth, barHeight);
     ctx.fillStyle = '#000';
     ctx.fillText(names[i], startBarX, startBarY + 15);
-    ctx.fillText(Math.floor(times[i], 0), startBarX, startBarY + barHeight - 5);
+    ctx.fillText(Math.floor(times[i]), startBarX, startBarY + barHeight - 5);
   }
 };
 
@@ -55,5 +55,5 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', 120, 40);
   ctx. fillText('Список результатов:', 120, 60);
 
-  getGameResults(ctx, names, times);
+  drawChart(ctx, names, times);
 };
