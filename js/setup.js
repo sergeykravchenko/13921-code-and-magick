@@ -61,19 +61,53 @@ var WIZARD_FIREBALLS = [
   '#e6e848'
 ];
 
-var getRandomInArray = function (array) {
-  var RandomIndex = Math.floor(Math.random() * array.length);
-  return RandomIndex;
+var getRandom = function (min, max) {
+  return Math.random() * (max - min) + min;
+};
+
+var getRandomInteger = function (min, max) {
+  return Math.floor(getRandom(min, max));
+};
+
+var getRandomFrom = function (array) {
+  return array[getRandomInteger(0, array.length)];
+};
+
+var getRandomFromOnce = function (array) {
+  var arrayCopy = array.slice();
+  var rest = [];
+  return function () {
+    rest = rest.length > 0 ? rest : rest.concat(arrayCopy);
+    return rest.splice(getRandomInteger(0, rest.length), 1);
+  };
+};
+
+var isFocused = function (element) {
+  return element === document.activeElement;
+};
+
+var removeClass = function (element, className) {
+  element.classList.remove(className);
+};
+
+var addClass = function (element, className) {
+  element.classList.add(className);
 };
 
 var wizards = [];
 
 for (var i = 0; i < 4; i++) {
-  var nameRandomIndex = getRandomInArray(WIZARD_NAMES);
+  var probability = 0.5;
+  var nameConcat;
+  if (Math.random() >= probability) {
+    nameConcat = getRandomFrom(WIZARD_NAMES) + ' ' + getRandomFrom(WIZARD_SURNAMES);
+  } else {
+    nameConcat = getRandomFrom(WIZARD_SURNAMES) + ' ' + getRandomFrom(WIZARD_NAMES);
+  }
   wizards[i] = {
-    name: WIZARD_NAMES[nameRandomIndex] + ' ' + WIZARD_SURNAMES[nameRandomIndex],
-    coatColor: WIZARD_COATS[getRandomInArray(WIZARD_COATS)],
-    eyesColor: WIZARD_EYES[getRandomInArray(WIZARD_EYES)]
+    name: nameConcat,
+    coatColor: getRandomFrom(WIZARD_COATS),
+    eyesColor: getRandomFrom(WIZARD_EYES)
   };
 }
 
@@ -94,7 +128,7 @@ for (var j = 0; j < wizards.length; j++) {
 }
 
 var onPopupEscPress = function (evt) {
-  if (evt.keyCode === ESC_KEYCODE && !wizardName.focused) {
+  if (evt.keyCode === ESC_KEYCODE && !isFocused(wizardName)) {
     closePopup();
   }
 };
@@ -136,9 +170,9 @@ wizardSubmit.addEventListener('click', function (evt) {
 
 var getRandomColor = function (el, array) {
   if (el.tagName === 'use') {
-    el.style.fill = array[getRandomInArray(array)];
+    el.style.fill = getRandomFromOnce(array)();
   } else {
-    el.style.background = array[getRandomInArray(array)];
+    el.style.background = getRandomFromOnce(array)();
   }
 };
 
@@ -154,4 +188,4 @@ wizardFireBallHandler.addEventListener('click', function () {
   getRandomColor(wizardFireBallHandler, WIZARD_FIREBALLS);
 });
 
-wizardSimilarBlock.classList.remove('hidden');
+removeClass(wizardSimilarBlock, 'hidden');
