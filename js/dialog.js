@@ -5,9 +5,12 @@ window.dialog = (function () {
   var wizardSetupOpen = document.querySelector('.setup-open');
   var wizardSetupClose = wizardDialog.querySelector('.setup-close');
   var wizardSubmit = wizardDialog.querySelector('.setup-submit');
+  var wizardName = wizardDialog.querySelector('.setup-user-name');
 
   var onPopupEscPress = function (evt) {
-    window.util.isEscEvent(evt, closePopup);
+    if (!window.util.isFocused(wizardName)) {
+      window.util.pressedEsc(evt, closePopup);
+    }
   };
 
   var openPopup = function () {
@@ -25,7 +28,7 @@ window.dialog = (function () {
   });
 
   wizardSetupOpen.addEventListener('keydown', function (evt) {
-    window.util.isEscEvent(evt, openPopup);
+    window.util.pressedEnter(evt, openPopup);
   });
 
   wizardSetupClose.addEventListener('click', function () {
@@ -33,7 +36,7 @@ window.dialog = (function () {
   });
 
   wizardSetupClose.addEventListener('keydown', function (evt) {
-    window.util.isEscEvent(evt, closePopup);
+    window.util.pressedEnter(evt, closePopup);
   });
 
   wizardSubmit.addEventListener('click', function (evt) {

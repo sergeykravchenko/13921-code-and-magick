@@ -7,12 +7,12 @@
   };
 
   window.util = {
-    isEscEvent: function (evt, action) {
+    pressedEsc: function (evt, action) {
       if (evt.keyCode === KEY_CODE.ESC) {
         action();
       }
     },
-    isEnterEvent: function (evt, action) {
+    pressedEnter: function (evt, action) {
       if (evt.keyCode === KEY_CODE.ENTER) {
         action();
       }

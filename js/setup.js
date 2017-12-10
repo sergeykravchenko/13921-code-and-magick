@@ -8,7 +8,6 @@ window.setup = (function () {
   var wizardCoatHandler = wizardSetup.querySelector('.setup-wizard .wizard-coat');
   var wizardEyesHandler = wizardSetup.querySelector('.setup-wizard .wizard-eyes');
   var wizardFireBallHandler = wizardSetup.querySelector('.setup-fireball-wrap');
-  var wizardName = wizardSetup.querySelector('.setup-user-name');
 
   var WIZARD_NAMES = [
     'Иван',
