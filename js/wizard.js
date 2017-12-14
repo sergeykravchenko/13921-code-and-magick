@@ -77,7 +77,4 @@
     fragment.appendChild(renderWizard(wizards[j]));
     wizardSimilarList.appendChild(fragment);
   }
-
-  window.wizard = {
-  };
 })();
