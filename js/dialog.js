@@ -2,6 +2,7 @@
 
 (function () {
   var wizardDialog = document.querySelector('.setup');
+  var wizardForm = wizardDialog.querySelector('.setup-wizard-form');
   var wizardSetupOpen = document.querySelector('.setup-open');
   var wizardSetupClose = wizardDialog.querySelector('.setup-close');
   var wizardSubmit = wizardDialog.querySelector('.setup-submit');
@@ -42,9 +43,9 @@
     window.util.pressedEnter(evt, closePopup);
   });
 
-  wizardSubmit.addEventListener('click', function (evt) {
+  wizardSubmit.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(wizardForm), window.backend.addClass(wizardDialog, 'hidden'), window.backend.showError);
     evt.preventDefault();
-    closePopup();
   });
 
   dialogHandle.addEventListener('mousedown', dragAndDrop);

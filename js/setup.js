@@ -36,14 +36,6 @@
     '#e6e848'
   ];
 
-  // var getRandomColor = function (el, array) {
-  //   if (el.tagName === 'use') {
-  //     el.style.fill = window.util.getRandomFromOnce(array)();
-  //   } else {
-  //     el.style.background = window.util.getRandomFromOnce(array)();
-  //   }
-  // };
-
   var fillElement = function (element, color) {
     element.style.fill = color;
   };
@@ -53,17 +45,14 @@
   };
 
   wizardCoatHandler.addEventListener('click', function () {
-    // getRandomColor(wizardCoatHandler, WIZARD_COATS);
     window.colorizeElement(wizardCoatHandler, WIZARD_COATS, fillElement);
   });
 
   wizardEyesHandler.addEventListener('click', function () {
-    // getRandomColor(wizardEyesHandler, WIZARD_EYES);
     window.colorizeElement(wizardEyesHandler, WIZARD_EYES, fillElement);
   });
 
   wizardFireBallHandler.addEventListener('click', function () {
-    // getRandomColor(wizardFireBallHandler, WIZARD_FIREBALLS);
     window.colorizeElement(wizardFireBallHandler, WIZARD_FIREBALLS, changeElementBackground);
   });
 
