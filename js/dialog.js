@@ -1,6 +1,6 @@
 'use strict';
 
-window.dialog = (function () {
+(function () {
   var wizardDialog = document.querySelector('.setup');
   var wizardSetupOpen = document.querySelector('.setup-open');
   var wizardSetupClose = wizardDialog.querySelector('.setup-close');

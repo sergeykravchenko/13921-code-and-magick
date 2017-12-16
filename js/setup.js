@@ -1,9 +1,9 @@
 'use strict';
 
-window.setup = (function () {
+(function () {
   var wizardSetup = document.querySelector('.setup');
-  var wizardCoatHandler = wizardSetup.querySelector('.setup-wizard .wizard-coat');
-  var wizardEyesHandler = wizardSetup.querySelector('.setup-wizard .wizard-eyes');
+  var wizardCoatHandler = wizardSetup.querySelector('.wizard-coat');
+  var wizardEyesHandler = wizardSetup.querySelector('.wizard-eyes');
   var wizardFireBallHandler = wizardSetup.querySelector('.setup-fireball-wrap');
   var shop = document.querySelector('.setup-artifacts-shop');
   var artifactsArea = document.querySelector('.setup-artifacts');
@@ -36,24 +36,35 @@ window.setup = (function () {
     '#e6e848'
   ];
 
-  var getRandomColor = function (el, array) {
-    if (el.tagName === 'use') {
-      el.style.fill = window.util.getRandomFromOnce(array)();
-    } else {
-      el.style.background = window.util.getRandomFromOnce(array)();
-    }
+  // var getRandomColor = function (el, array) {
+  //   if (el.tagName === 'use') {
+  //     el.style.fill = window.util.getRandomFromOnce(array)();
+  //   } else {
+  //     el.style.background = window.util.getRandomFromOnce(array)();
+  //   }
+  // };
+
+  var fillElement = function (element, color) {
+    element.style.fill = color;
+  };
+
+  var changeElementBackground = function (element, color) {
+    element.style.backgroundColor = color;
   };
 
   wizardCoatHandler.addEventListener('click', function () {
-    getRandomColor(wizardCoatHandler, WIZARD_COATS);
+    // getRandomColor(wizardCoatHandler, WIZARD_COATS);
+    window.colorizeElement(wizardCoatHandler, WIZARD_COATS, fillElement);
   });
 
   wizardEyesHandler.addEventListener('click', function () {
-    getRandomColor(wizardEyesHandler, WIZARD_EYES);
+    // getRandomColor(wizardEyesHandler, WIZARD_EYES);
+    window.colorizeElement(wizardEyesHandler, WIZARD_EYES, fillElement);
   });
 
   wizardFireBallHandler.addEventListener('click', function () {
-    getRandomColor(wizardFireBallHandler, WIZARD_FIREBALLS);
+    // getRandomColor(wizardFireBallHandler, WIZARD_FIREBALLS);
+    window.colorizeElement(wizardFireBallHandler, WIZARD_FIREBALLS, changeElementBackground);
   });
 
   function dragStartArtifact(evt) {
